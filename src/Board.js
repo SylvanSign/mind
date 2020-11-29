@@ -2,10 +2,14 @@ export default function MindBoard(props) {
   return (
     <div>
       <h1>
-        {JSON.stringify(props.G.players[props.playerID])}
+        player: {JSON.stringify(props.G.players[props.playerID])}
       </h1>
       <h1>
-        {props.G.card}
+        lastPlayed: {props.G.lastPlayed[props.playerID]}
+      </h1>
+      <br />
+      <h1>
+        card: {props.G.card}
       </h1>
     </div>
   );

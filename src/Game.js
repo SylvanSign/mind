@@ -1,9 +1,10 @@
 import {
   ActivePlayers,
   PlayerView,
+  INVALID_MOVE,
 } from 'boardgame.io/core'
 
-const MAX_CARD = 4
+const MAX_CARD = 100
 
 const Mind = {
   name: 'Mind',
@@ -11,11 +12,15 @@ const Mind = {
   playerView: PlayerView.STRIP_SECRETS,
 
   setup(ctx) {
+    const deck = [...Array(MAX_CARD + 1).keys()]
+    deck.shift() // remove `0` card
+
     return {
       card: 0,
-      level: 2,
-      deck: ctx.random.Shuffle([...Array(MAX_CARD).keys()]),
+      level: 3,
       players: {},
+      lastPlayed: {},
+      deck: ctx.random.Shuffle(deck),
     }
   },
 
@@ -31,8 +36,16 @@ const Mind = {
   },
 
   moves: {
-    playCard(G, ctx, cardIndex) {
-      G.card = G.players[ctx.playerID].splice(cardIndex, 1)[0]
+    playCard(G, { playerID }, card) {
+      const hand = G.players[playerID]
+      const index = hand.indexOf(card)
+      if (index === -1) {
+        return INVALID_MOVE
+      }
+      hand.splice(index, 1)
+
+      G.lastPlayed[playerID] = card
+      G.card = card
     },
   },
 }

@@ -5,7 +5,7 @@ import MindBoard from './Board'
 
 const MindClient = Client({
   game: Mind,
-  board: MindBoard,
+  // board: MindBoard,
   multiplayer: Local(),
 })
 
