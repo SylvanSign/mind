@@ -1,19 +1,19 @@
 import { Client } from 'boardgame.io/react'
-import { SocketIO } from 'boardgame.io/multiplayer'
-import { TicTacToe } from './Game'
-import { TicTacToeBoard } from './Board'
+import { Local } from 'boardgame.io/multiplayer'
+import Mind from './Game'
+import MindBoard from './Board'
 
-const TicTacToeClient = Client({
-  game: TicTacToe,
-  board: TicTacToeBoard,
-  multiplayer: SocketIO({ server: 'localhost:8000' }),
+const MindClient = Client({
+  game: Mind,
+  board: MindBoard,
+  multiplayer: Local(),
 })
 
 const App = () => (
   <div>
-    <TicTacToeClient playerID="0" />
-    <TicTacToeClient playerID="1" />
+    <MindClient playerID="0" />
+    <MindClient playerID="1" />
   </div>
-);
+)
 
-export default App;
+export default App

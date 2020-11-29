@@ -1,6 +1,6 @@
 import { Server } from 'boardgame.io/server'
-import { TicTacToe } from './Game'
+import Mind from './Game'
 
-const server = Server({ games: [TicTacToe] });
+const server = Server({ games: [Mind] })
 
-server.run(8000);
+server.run(8000)
