@@ -1,21 +1,14 @@
-import { Client } from 'boardgame.io/react'
-import { SocketIO } from 'boardgame.io/multiplayer'
+import { Lobby } from 'boardgame.io/react'
 import Mind from './Game'
 import MindBoard from './Board'
 
-const MindClient = Client({
-  game: Mind,
-  board: MindBoard,
-  multiplayer: SocketIO({ server: "localhost:8000" }),
-  numPlayers: 2,
-})
 
-const matchID = Math.random()
-const App = () => (
-  <div>
-    <MindClient playerID="0" matchID={matchID} />
-    <MindClient playerID="1" matchID={matchID} />
-  </div>
+export default () => (
+  <Lobby
+    gameServer={`http://${window.location.hostname}:8000`}
+    lobbyServer={`http://${window.location.hostname}:8000`}
+    gameComponents={[
+      { game: Mind, board: MindBoard }
+    ]}
+  />
 )
-
-export default App
